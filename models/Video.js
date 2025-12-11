@@ -1,15 +1,13 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const VideoSchema = new Schema({
-  title: String,
-  description: String,
-  ownerId: { type: Schema.Types.ObjectId, ref: 'User', required: false },
-  url: String,
-  thumbnailUrl: String,
-  type: { type: String, enum: ['video','image'], default: 'video' },
-  duration: Number,
-  resolutions: { type: Object, default: {} },
-  status: { type: String, enum: ['pending','approved'], default: 'pending' },
-  createdAt: { type: Date, default: Date.now }
-});
-module.exports = mongoose.model('Video', VideoSchema);
+﻿const mongoose = require("mongoose");
+
+const VideoSchema = new mongoose.Schema({
+  title: { type: String, default: "Untitled" },
+  description: { type: String, default: "" },
+  url: { type: String, default: "" },
+  thumbnailUrl: { type: String, default: "" },
+  duration: { type: Number, default: 0 },
+  status: { type: String, enum: ["pending","approved","rejected"], default: "pending" },
+  tags: [String],
+}, { timestamps: true });
+
+module.exports = mongoose.model("Video", VideoSchema);
